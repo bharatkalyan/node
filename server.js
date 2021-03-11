@@ -9,7 +9,6 @@ app.use(bodyParser.json())
 const PORT = 3002;
 
 app.use('/countries', (req,res)=>{
-    res.setHeader('Content-Type', 'text/plain');
     nodeApi.callExternalApiUsingHttp(function(response){
                         res.send( response);
                         res.end();
