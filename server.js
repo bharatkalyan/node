@@ -1,4 +1,4 @@
-const nodeApi = require('./controller/index');
+const nodeApi = require('./controller');
 const express = require('express');
 const bodyParser = require('body-parser')
 const app = express();
@@ -10,12 +10,12 @@ const PORT = 3002;
 
 app.use('/countries', (req,res)=>{
     nodeApi.callExternalApiUsingHttp(function(response){
-                        res.send( response);
+                        res.send(response);
                         res.end();
                     });
 });
 app.get('/', (req,res)=>{
-    res.send('hello node')
+    res.send('node')
 })
 
 app.listen(PORT, ()=>console.log(`server running on http ${PORT}`));
