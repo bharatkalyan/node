@@ -3,10 +3,9 @@ const https = require('https');
 const config = require("../config/config.js");
 
 
-const callExternalApiUsingHttp = (callback) => {
+exports.callExternalApiUsingHttp = (callback) => {
     https.get( config.url, (resp) => {
     let data = '';
-    
     // A chunk of data has been recieved.
     resp.on('data', (chunk) => {
         data += chunk;
@@ -24,6 +23,6 @@ const callExternalApiUsingHttp = (callback) => {
     });
 }
 
-module.exports.callApi = callExternalApiUsingHttp;
+//module.exports.callApi = callExternalApiUsingHttp;
 
       

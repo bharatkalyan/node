@@ -1,22 +1,22 @@
 const nodeApi = require('./controller/index');
 const express = require('express');
-const http = require('http');
-
+const bodyParser = require('body-parser')
 const app = express();
 var cors = require('cors');
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+const PORT = 3002;
 
+app.use('/countries', (req,res)=>{
+    res.setHeader('Content-Type', 'text/plain');
+    nodeApi.callExternalApiUsingHttp(function(response){
+                        res.send( response);
+                        res.end();
+                    });
+});
+app.get('/', (req,res)=>{
+    res.send('hello node')
+})
 
-
-http.createServer((req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-      if(req.url === "/node"){
-            nodeApi.callApi(function(response){
-                res.write(response);
-                res.end();
-            });
-        }
-}).listen(3002);
-
-
-console.log("service running on 3002 port....");
+app.listen(PORT, ()=>console.log(`server running on http ${PORT}`));
